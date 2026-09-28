@@ -1,0 +1,17 @@
+{
+  "name": "orbit-apm-agent",
+  "version": "1.0.0",
+  "private": false,
+  "description": "A browser-based Associate Product Manager agent that turns product context into execution-ready artifacts.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "test:coverage": "node --test --experimental-test-coverage",
+    "check": "node --check dist/agent.js && node --check dist/app.js && node --check dist/webmcp.js && node --check scripts/serve.mjs && node --test",
+    "start": "node scripts/serve.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

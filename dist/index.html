@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#07111f" />
+    <meta name="description" content="Turn a product problem into an execution-ready brief, PRD, backlog, experiment, launch checklist, and stakeholder update." />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2307111f'/%3E%3Cellipse cx='32' cy='32' rx='23' ry='10' fill='none' stroke='%2337e6c4' stroke-width='5' transform='rotate(-28 32 32)'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%23ffffff'/%3E%3C/svg%3E" />
+    <title>Orbit APM — Product work, structured</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to workspace</a>
+    <header class="topbar">
+      <a class="brand" href="#workspace" aria-label="Orbit APM home">
+        <span class="brand-mark" aria-hidden="true"><span></span></span>
+        <span>Orbit <b>APM</b></span>
+      </a>
+      <div class="top-actions">
+        <span class="privacy-note"><span class="privacy-dot" aria-hidden="true"></span> Stored on this device</span>
+        <label class="button button-quiet file-button" for="import-file">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 17V5m0 0 4 4m-4-4-4 4M5 20h14" /></svg>
+          Import
+        </label>
+        <input id="import-file" type="file" accept="application/json,.json" hidden />
+        <button id="export-menu-button" class="button button-quiet" type="button" aria-haspopup="menu" aria-expanded="false">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14" /></svg>
+          Export
+        </button>
+        <div id="export-menu" class="menu" role="menu" hidden>
+          <button type="button" role="menuitem" data-export="markdown">Markdown document</button>
+          <button type="button" role="menuitem" data-export="json">Orbit workspace</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="workspace" class="workspace">
+      <aside class="rail" aria-label="Plan artifacts">
+        <div>
+          <p class="eyebrow">Workspace</p>
+          <nav id="artifact-nav" class="artifact-nav">
+            <button type="button" class="nav-item active" data-view="brief" disabled>
+              <span>01</span> Brief <small>Frame the bet</small>
+            </button>
+            <button type="button" class="nav-item" data-view="prd" disabled>
+              <span>02</span> PRD <small>Align the build</small>
+            </button>
+            <button type="button" class="nav-item" data-view="backlog" disabled>
+              <span>03</span> Backlog <small>Sequence the work</small>
+            </button>
+            <button type="button" class="nav-item" data-view="experiment" disabled>
+              <span>04</span> Experiment <small>Test the bet</small>
+            </button>
+            <button type="button" class="nav-item" data-view="risks" disabled>
+              <span>05</span> Risks <small>Protect the launch</small>
+            </button>
+            <button type="button" class="nav-item" data-view="launch" disabled>
+              <span>06</span> Launch <small>Ship responsibly</small>
+            </button>
+            <button type="button" class="nav-item" data-view="update" disabled>
+              <span>07</span> Update <small>Keep people aligned</small>
+            </button>
+          </nav>
+        </div>
+        <div id="history-panel" class="history-panel">
+          <div class="history-heading">
+            <p class="eyebrow">Recent runs</p>
+            <button id="clear-history" class="text-button" type="button">Clear</button>
+          </div>
+          <div id="history-list" class="history-list"><p class="history-empty">Your plans will appear here.</p></div>
+        </div>
+      </aside>
+
+      <section class="intake" aria-labelledby="intake-title">
+        <div class="intake-heading">
+          <p class="eyebrow">Product context</p>
+          <h1 id="intake-title">What are we trying to change?</h1>
+          <p>Give Orbit the messy version. It will expose assumptions and turn the work into a decision-ready plan.</p>
+        </div>
+
+        <form id="apm-form" novalidate>
+          <div class="field-row">
+            <label class="field">
+              <span>Product or initiative</span>
+              <input id="product" name="product" type="text" maxlength="120" placeholder="e.g. Team onboarding" autocomplete="off" />
+            </label>
+            <label class="field compact">
+              <span>Stage</span>
+              <select id="stage" name="stage">
+                <option value="discovery">Discovery</option>
+                <option value="validation">Validation</option>
+                <option value="build">Build</option>
+                <option value="launch">Launch</option>
+                <option value="growth">Growth</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Customer problem <b aria-hidden="true">*</b></span>
+            <textarea id="problem" name="problem" rows="4" maxlength="3000" required placeholder="Who is struggling, what are they trying to do, and where does it break down?"></textarea>
+          </label>
+
+          <label class="field">
+            <span>Desired outcome <b aria-hidden="true">*</b></span>
+            <input id="outcome" name="outcome" type="text" maxlength="1000" required placeholder="e.g. Increase week-one activation from 32% to 45%" />
+          </label>
+
+          <details class="context-details">
+            <summary>More context <span>Improves confidence</span></summary>
+            <div class="detail-fields">
+              <label class="field">
+                <span>Target audience</span>
+                <input id="audience" name="audience" type="text" maxlength="300" placeholder="e.g. New workspace admins at 20–100 person companies" />
+              </label>
+              <label class="field">
+                <span>Evidence</span>
+                <textarea id="evidence" name="evidence" rows="3" maxlength="2000" placeholder="Research themes, funnel data, support volume, quotes, or prior tests"></textarea>
+              </label>
+              <label class="field">
+                <span>Constraints</span>
+                <textarea id="constraints" name="constraints" rows="3" maxlength="1500" placeholder="Timing, staffing, technology, compliance, operational limits"></textarea>
+              </label>
+              <label class="field">
+                <span>Decision date</span>
+                <input id="deadline" name="deadline" type="text" maxlength="120" placeholder="e.g. Pilot decision by October 30" />
+              </label>
+            </div>
+          </details>
+
+          <div id="form-error" class="form-error" role="alert" hidden></div>
+          <button class="button button-primary" type="submit">
+            <span>Run PM workflow</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5" /></svg>
+          </button>
+          <p class="shortcut">⌘ / Ctrl + Enter</p>
+        </form>
+
+        <div class="samples" aria-labelledby="samples-title">
+          <p id="samples-title" class="eyebrow">Try an example</p>
+          <div>
+            <button type="button" class="sample-chip" data-sample="activation">Activation drop-off</button>
+            <button type="button" class="sample-chip" data-sample="retention">Retention risk</button>
+            <button type="button" class="sample-chip" data-sample="reliability">Reliability issue</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="output" class="output" aria-live="polite" aria-busy="false">
+        <div id="empty-state" class="empty-state">
+          <div class="orbit-visual" aria-hidden="true">
+            <span class="orbit orbit-one"></span>
+            <span class="orbit orbit-two"></span>
+            <span class="core"></span>
+            <i class="satellite"></i>
+          </div>
+          <p class="eyebrow">Ready when you are</p>
+          <h2>From ambiguity to a plan people can act on.</h2>
+          <p>Orbit produces seven connected artifacts, flags missing evidence, and keeps every recommendation tied to a decision.</p>
+          <div class="empty-grid">
+            <span><b>7</b> linked artifacts</span>
+            <span><b>RICE</b> priorities</span>
+            <span><b>0</b> data sent away</span>
+          </div>
+        </div>
+        <div id="plan-view" hidden>
+          <div class="plan-toolbar">
+            <div>
+              <p id="plan-kicker" class="eyebrow"></p>
+              <h2 id="plan-title"></h2>
+            </div>
+            <div class="toolbar-actions">
+              <span id="plan-status" class="status-pill"></span>
+              <button id="copy-view" class="icon-button" type="button" title="Copy current artifact" aria-label="Copy current artifact">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 8h11v11H8zM5 16H4V5h11v1" /></svg>
+              </button>
+            </div>
+          </div>
+          <div id="artifact-content" class="artifact-content"></div>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
